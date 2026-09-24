@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>草莓吃芒果 · 网页游戏厅</title>
+<meta name="description" content="浏览器里直接玩的 3D 同人游戏合集：绝地求生、守望先锋、英雄联盟、三角洲行动。" />
+<style>
+:root{--bg:#0b0d12;--card:#141821;--line:rgba(255,255,255,.08);--txt:#eef1f6;--muted:#8d96a6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at top,#1a2030 0,#0b0d12 60%);color:var(--txt);font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;min-height:100vh}
+header{max-width:1120px;margin:0 auto;padding:64px 16px 28px}
+h1{font-size:clamp(32px,6vw,54px);font-weight:900;letter-spacing:2px}
+h1 span{background:linear-gradient(90deg,#ff6a8a,#ffb534);-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{color:var(--muted);margin-top:10px;font-size:15px;line-height:1.7}
+main{max-width:1120px;margin:0 auto;padding:0 16px 64px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{position:relative;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s,border-color .18s}
+a.card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.45);border-color:var(--c1)}
+.cover{height:150px;position:relative;background:linear-gradient(135deg,var(--c1),var(--c2) 70%);display:flex;align-items:flex-end;padding:14px 16px}
+.cover::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 14px)}
+.cover .en{position:relative;z-index:1;font-weight:900;font-size:22px;letter-spacing:3px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);font-style:italic}
+.tag{position:absolute;top:12px;left:12px;z-index:1;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(0,0,0,.45);color:#fff}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.body h2{font-size:19px}
+.body p{color:var(--muted);font-size:13px;line-height:1.6;flex:1}
+.go{align-self:flex-start;font-size:13px;font-weight:800;padding:7px 16px;border-radius:8px;background:var(--c1);color:#111}
+.soon{opacity:.7}.soon .go{background:#2a2f3a;color:var(--muted)}
+footer{text-align:center;color:#5d6574;font-size:12px;padding:0 16px 40px;line-height:1.8}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎮 <span>网页游戏厅</span></h1>
+  <p>浏览器里直接玩的 3D 同人游戏，无需下载安装。建议使用电脑端 Chrome / Edge，键鼠操作体验最佳。</p>
+</header>
+<main id="list"></main>
+<footer>以上均为爱好者制作的同人作品，与 KRAFTON、暴雪娱乐、拳头游戏、腾讯等官方无关。</footer>
+<script src="games.js"></script>
+<script>
+document.getElementById('list').innerHTML = GAMES.map(g => {
+  const inner = `<div class="cover"><span class="tag">${g.tag}</span><span class="en">${g.en}</span></div><div class="body"><h2>${g.name}</h2><p>${g.desc}</p><span class="go">${g.ready ? '开始游戏 →' : '制作中…'}</span></div>`;
+  const style = `--c1:${g.c1};--c2:${g.c2}`;
+  return g.ready ? `<a class="card" href="/${g.id}/" style="${style}">${inner}</a>` : `<div class="card soon" style="${style}">${inner}</div>`;
+}).join('');
+</script>
+</body>
+</html>
